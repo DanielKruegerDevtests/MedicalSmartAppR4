@@ -16,6 +16,11 @@
         </style>
     </head>
     <body>
+        <script type="text/javascript">
+        const client = FHIR.client("https://r3.smarthealthit.org");
+        client.request("Patient").then(console.log).catch(console.error);
+        </script>
+        <!--
         <h4>Current Patient</h4>
         <div id="patient">Loading...</div>
         <br/>
@@ -61,5 +66,6 @@
 
             }).catch(console.error);
         </script>
+        -->
     </body>
 </html>
