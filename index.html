@@ -16,8 +16,10 @@
         </style>
     </head>
     <body>
+        <h1>Daniels Smart App</h1>
         <script type="text/javascript">
         const client = FHIR.client("https://r3.smarthealthit.org");
+        console.log("PatientenArray");
         client.request("Patient").then(console.log).catch(console.error);
         </script>
         <!--
