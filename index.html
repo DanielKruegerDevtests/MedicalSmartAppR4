@@ -25,17 +25,19 @@
     </script>-->
 
     <script type="text/javascript">
-        function onError() {
-            console.log('Authentfication error', arguments);
-            ret.reject();
-        }
 
         function onReady(client) {
             console.log('Authentfication successful', arguments);
-            ret.promise();
+            //ret.promise();
 
         }
 
+        function onError() {
+            console.log('Authentfication error', arguments);
+            //ret.reject();
+        }
+
+        
         FHIR.oauth2.ready(onReady, onError);
 
     </script>
