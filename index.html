@@ -16,38 +16,55 @@
         }
     </style>
 </head>
-    <body>
-        <h1>Daniels Smart App</h1>
-        <script type="text/javascript">
-        const client = FHIR.client("https://r3.smarthealthit.org");
-        console.log("PatientenArray");
-        client.request("Patient").then(console.log).catch(console.error);
-        </script>
-        <!--
+<body>
+    <h1>Daniels Smart App</h1>
+    <!--<script type="text/javascript">
+    const client = FHIR.client("https://r3.smarthealthit.org");
+    console.log("PatientenArray");
+    client.request("Patient").then(console.log).catch(console.error);
+    </script>-->
+
+    <script type="text/javascript">
+        function onError() {
+            console.log('Authentfication error', arguments);
+            ret.reject();
+        }
+
+        function onReady(client) {
+            console.log('Authentfication successful', arguments);
+            ret.promise();
+
+        }
+
+        FHIR.oauth2.ready(onReady, onError);
+
+    </script>
+
+    <!--
         <h4>Current Patient</h4>
-        <div id="patient">Loading...</div>
-        <br/>
-        <h4>Medications</h4>
-        <div id="meds">Loading...</div>
-        <script type="text/javascript">
-            FHIR.oauth2.ready().then(function(client) {
-                
-                // Render the current patient (or any error)
-                client.patient.read().then(
-                    function(pt) {
-                        document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
-                    },
-                    function(error) {
-                        document.getElementById("patient").innerText = error.stack;
-                    }
-                );
-                
+            <div id="patient">Loading...</div>
+            <br />
+            <h4>Medications</h4>
+            <div id="meds">Loading...</div>
+            <script type="text/javascript">
+                FHIR.oauth2.ready().then(function(client) {
+
+                    // Render the current patient (or any error)
+                    client.patient.read().then(
+                        function (pt) {
+                            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                        },
+                        function (error) {
+                            document.getElementById("patient").innerText = error.stack;
+                        }
+                    );
+
                 // Get MedicationRequests for the selected patient
                 client.request("/MedicationRequest?patient=" + client.patient.id, {
                     resolveReferences: [ "medicationReference" ],
                     graph: true
                 })
-                
+
                 // Reject if no MedicationRequests are found
                 .then(function(data) {
                     if (!data.entry || !data.entry.length) {
@@ -55,20 +72,20 @@
                     }
                     return data.entry;
                 })
-                
+
 
                 // Render the current patient's medications (or any error)
                 .then(
                     function(meds) {
-                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                    document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
                     },
                     function(error) {
-                        document.getElementById("meds").innerText = error.stack;
+                    document.getElementById("meds").innerText = error.stack;
                     }
                 );
 
             }).catch(console.error);
-        </script>
-        -->
-    </body>
+    </script>
+    -->
+</body>
 </html>
