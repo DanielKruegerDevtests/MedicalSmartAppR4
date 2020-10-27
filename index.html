@@ -87,9 +87,20 @@
                 );
 
             }).catch(console.error);
-    </script>
+    </script >
  
     <button type="button" id="changeMedi">Change medication</button>
+    
+    <script type="text/javascript">
+
+        document.querySelector('#changeMedi').addEventListener('click', changeMedication);
+
+        function changeMedication {
+
+            console.log("Button pressed");
+        }
+
+    </script>
 
 </body>
 </html>
