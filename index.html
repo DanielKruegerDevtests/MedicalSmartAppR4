@@ -51,6 +51,7 @@
             <script type="text/javascript">
 
                 var globalClient; // global variable to hold the client object got by ready-function
+                var globalMeds;
 
                 FHIR.oauth2.ready().then(function(client) {
 
@@ -82,7 +83,8 @@
 
                 // Render the current patient's medications (or any error)
                 .then(
-                    function(meds) {
+                    function (meds) {
+                        globalMeds = meds
                     document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
                     },
                     function(error) {
@@ -99,10 +101,13 @@
 
         document.querySelector('#changeMedi').addEventListener('click', changeMedication);
 
-        function changeMedication () {
+        function changeMedication() {
+
+            var mediResource = globalMeds;
 
             console.log("Button pressed");
-            globalClient.update();
+
+            globalClient.update(mediResource);
 
         }
 
