@@ -108,7 +108,7 @@
         function changeMedication() {
 
             var mediResource = globalMeds[0];
-            mediResource.intent = "delivery";
+            mediResource.resource.intent = "delivery";
 
             document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
 
