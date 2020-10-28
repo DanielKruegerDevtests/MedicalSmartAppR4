@@ -48,6 +48,8 @@
             <br />
             <h4>Medications</h4>
             <div id="meds">Loading...</div>
+
+            <div id="mediResource"> Waiting for data...</div>
             <script type="text/javascript">
 
                 var globalClient; // global variable to hold the client object got by ready-function
@@ -95,19 +97,20 @@
             }).catch(console.error);
     </script >
  
-    <button type="button" id="changeMedi">Change medication</button>
+    <button type="button" id="btnChangeMedi">Change medication</button>
     
     <script type="text/javascript">
 
-        document.querySelector('#changeMedi').addEventListener('click', changeMedication);
+        document.querySelector('#btnChangeMedi').addEventListener('click', changeMedication);
 
         function changeMedication() {
 
             var mediResource = globalMeds[0];
 
+            document.getElementById("mediResource").innerText = JSON.stringify(mediResource, null, 4);
 
             console.log("Button pressed");
-            console.log(mediResource);
+            //console.log(mediResource);
 
             //globalClient.update(mediResource);
 
