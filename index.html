@@ -84,11 +84,11 @@
                 // Render the current patient's medications (or any error)
                 .then(
                     function (meds) {
-                        globalMeds = meds
-                    document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                        globalMeds = meds;
+                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
                     },
                     function(error) {
-                    document.getElementById("meds").innerText = error.stack;
+                        document.getElementById("meds").innerText = error.stack;
                     }
                 );
 
@@ -103,7 +103,7 @@
 
         function changeMedication() {
 
-            var mediResource = globalMeds;
+            var mediResource = globalMeds[0];
 
 
             console.log("Button pressed");
