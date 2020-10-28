@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>Daniels Smart App</h1>
+    <h1>Smart App Test by ESS/DK</h1>
     <!--<script type="text/javascript">
     const client = FHIR.client("https://r3.smarthealthit.org");
     console.log("PatientenArray");
@@ -48,9 +48,11 @@
             <br />
             <h4>Medications</h4>
             <div id="meds">Loading...</div>
-
+            <br/>
+            <h4>Medication Resource</h4>
             <div id="medResource">Waiting for data...</div>
-            <script type="text/javascript">
+            
+    <script type="text/javascript">
 
                 var globalClient; // global variable to hold the client object got by ready-function
                 var globalMeds;
@@ -106,6 +108,7 @@
         function changeMedication() {
 
             var mediResource = globalMeds[0];
+            mediResource.intent = "delivery";
 
             document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
 
