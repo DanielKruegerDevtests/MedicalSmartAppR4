@@ -109,13 +109,13 @@
 
             var mediResource = globalMeds[0].resource;
 
-            mediResource.intent = "delivery";
+            mediResource.intent = "proposal";
 
             document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
 
             console.log("Button pressed");
            
-            globalClient.update(mediResource);
+            console.log(globalClient.update(mediResource));
 
         }
 
