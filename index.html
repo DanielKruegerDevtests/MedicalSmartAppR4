@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Example SMART App</title>
+    <title>MedicalSmartAppR4 by ESS/DK</title>
     <!--<script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>-->
     <script src='./FHIRLib/fhir-client.js'></script>
     <style>
@@ -18,32 +18,8 @@
 </head>
 <body>
     <h1>Smart App Test by ESS/DK</h1>
-    <!--<script type="text/javascript">
-    const client = FHIR.client("https://r3.smarthealthit.org");
-    console.log("PatientenArray");
-    client.request("Patient").then(console.log).catch(console.error);
-    </script>-->
-
-   <!-- <script type="text/javascript">
-
-        function onReady(client) {
-            console.log('Authentfication successful', arguments);
-            //ret.promise();
-
-        }
-
-        function onError(status) {
-            console.log('Authentfication error', arguments);
-            //ret.reject();
-        }
-
         
-        FHIR.oauth2.ready(onReady, onError);
-
-    </script> -->
-
-    
-        <h4>Current Patient</h4>
+        <h4>Patient information</h4>
             <div id="patient">Loading...</div>
             <br />
             <h4>Medications</h4>
@@ -61,9 +37,10 @@
 
                     // Render the current patient (or any error)
                     globalClient = client;
+                    var patient = client.patient;
                     client.patient.read().then(
                         function (pt) {
-                            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                            document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                         },
                         function (error) {
                             document.getElementById("patient").innerText = error.stack;
