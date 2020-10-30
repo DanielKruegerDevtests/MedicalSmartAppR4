@@ -20,7 +20,8 @@
     <h1>Smart App Test by ESS/DK</h1>
         
         <h4>Patient information</h4>
-            <div id="patient">Loading...</div>
+          
+            PatientId: <div id="patient_ id">Loading...</div>
             <br />
             <h4>Medications</h4>
             <div id="meds">Loading...</div>
@@ -37,10 +38,10 @@
 
                     // Render the current patient (or any error)
                     globalClient = client;
-                    var patient = client.patient;
                     client.patient.read().then(
                         function (pt) {
-                            document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
+                            document.getElementById("patient_id").innerHTML = pt.id;
+                            //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                         },
                         function (error) {
                             document.getElementById("patient").innerText = error.stack;
