@@ -21,7 +21,7 @@
         
         <h4>Patient information</h4>
           
-            PatientId: <p id="patient_ id">Loading...</p>
+        <p id="patient_ id">PatientID: Loading...</p>
             <br />
             <h4>Medications</h4>
             <div id="meds">Loading...</div>
@@ -40,7 +40,7 @@
                     globalClient = client;
                     client.patient.read().then(
                         function (pt) {
-                            document.getElementById("patient_id").innerHTML = "Hier kommt die PatientId hin;
+                            document.getElementById("patient_id").innerHTML = "PatientID: Hier kommt die PatientId hin";
                             //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                         },
                         function (error) {
