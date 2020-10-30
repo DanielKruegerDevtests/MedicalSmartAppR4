@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Example SMART App</title>
+    <!--<script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>-->
+    <script src='./FHIRLib/fhir-client.js'></script>
+    <style>
+        #patient, #meds, #medResource{
+            font-family: Monaco, monospace;
+            white-space: pre;
+            font-size: 13px;
+            height: 30vh;
+            overflow: scroll;
+            border: 1px solid #CCC;
+        }
+    </style>
+</head>
+<body>
+    <h1>Smart App Test by ESS/DK</h1>
+    <!--<script type="text/javascript">
+    const client = FHIR.client("https://r3.smarthealthit.org");
+    console.log("PatientenArray");
+    client.request("Patient").then(console.log).catch(console.error);
+    </script>-->
+
+   <!-- <script type="text/javascript">
+
+        function onReady(client) {
+            console.log('Authentfication successful', arguments);
+            //ret.promise();
+
+        }
+
+        function onError(status) {
+            console.log('Authentfication error', arguments);
+            //ret.reject();
+        }
+
+        
+        FHIR.oauth2.ready(onReady, onError);
+
+    </script> -->
+
+    
+        <h4>Current Patient</h4>
+            <div id="patient">Loading...</div>
+            <br />
+            <h4>Medications</h4>
+            <div id="meds">Loading...</div>
+            <br/>
+            <h4>Medication Resource</h4>
+            <div id="medResource">Waiting for data...</div>
+            
+    <script type="text/javascript">
+
+                var globalClient; // global variable to hold the client object got by ready-function
+                var globalMeds;
+
+                FHIR.oauth2.ready().then(function(client) {
+
+                    // Render the current patient (or any error)
+                    globalClient = client;
+                    client.patient.read().then(
+                        function (pt) {
+                            document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                        },
+                        function (error) {
+                            document.getElementById("patient").innerText = error.stack;
+                        }
+                    );
+
+                // Get MedicationRequests for the selected patient
+                client.request("/MedicationRequest?patient=" + client.patient.id, {
+                    resolveReferences: [ "medicationReference" ],
+                    graph: true
+                })
+
+                // Reject if no MedicationRequests are found
+                .then(function(data) {
+                    if (!data.entry || !data.entry.length) {
+                        throw new Error("No medications found for the selected patient");
+                    }
+                    return data.entry;
+                })
+
+
+                // Render the current patient's medications (or any error)
+                .then(
+                    function (meds) {
+                        globalMeds = meds;
+                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                    },
+                    function(error) {
+                        document.getElementById("meds").innerText = error.stack;
+                    }
+                );
+
+            }).catch(console.error);
+    </script >
+ 
+    <button type="button" id="btnChangeMedi">Change medication</button>
+    
+    <script type="text/javascript">
+
+        document.querySelector('#btnChangeMedi').addEventListener('click', changeMedication);
+
+        function changeMedication() {
+
+            var mediResource = globalMeds[0].resource;
+
+            mediResource.intent = "delivery";
+
+            document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
+
+            console.log("Button pressed");
+           
+            console.log(globalClient.update(mediResource));
+
+        }
+
+    </script>
+
+</body>
+</html>
