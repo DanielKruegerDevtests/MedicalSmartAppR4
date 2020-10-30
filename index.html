@@ -18,44 +18,44 @@
 </head>
 <body>
     <h1>Smart App Test by ESS/DK</h1>
-        
-        <h4>Patient information</h4>
-          
-        <p id="patient_ id">PatientID: Loading...</p>
-            <br />
-            <h4>Medications</h4>
-            <div id="meds">Loading...</div>
-            <br/>
-            <h4>Medication Resource</h4>
-            <div id="medResource">Waiting for data...</div>
-            
+
+    <h4>Patient information</h4>
+
+    <p id="patient_ id">PatientID: Loading...</p>
+    <br />
+    <!--<h4>Medications</h4>
+    <div id="meds">Loading...</div>
+    <br/>
+    <h4>Medication Resource</h4>
+    <div id="medResource">Waiting for data...</div>
+    -->
     <script type="text/javascript">
 
-                var globalClient; // global variable to hold the client object got by ready-function
-                var globalMeds;
+        var globalClient; // global variable to hold the client object got by ready-function
+       // var globalMeds;
 
-                FHIR.oauth2.ready().then(function(client) {
+        FHIR.oauth2.ready().then(function (client) {
 
-                    // Render the current patient (or any error)
-                    globalClient = client;
-                    client.patient.read().then(
-                        function (pt) {
-                            document.getElementById("patient_id").innerHTML = "PatientID: Hier kommt die PatientId hin";
-                            //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
-                        },
-                        function (error) {
-                            document.getElementById("patient").innerText = error.stack;
-                        }
-                    );
+            // Render the current patient (or any error)
+            globalClient = client;
+            client.patient.read().then(
+                function (pt) {
+                    document.getElementById("patient_id").innerHTML = "PatientID: Hier kommt die PatientId hin";
+                    //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
+                },
+                function (error) {
+                    document.getElementById("patient_id").innerText = error.stack;
+                }
+            );
 
-                // Get MedicationRequests for the selected patient
-                client.request("/MedicationRequest?patient=" + client.patient.id, {
-                    resolveReferences: [ "medicationReference" ],
-                    graph: true
-                })
+            // Get MedicationRequests for the selected patient
+            /*client.request("/MedicationRequest?patient=" + client.patient.id, {
+                resolveReferences: ["medicationReference"],
+                graph: true
+            })
 
                 // Reject if no MedicationRequests are found
-                .then(function(data) {
+                .then(function (data) {
                     if (!data.entry || !data.entry.length) {
                         throw new Error("No medications found for the selected patient");
                     }
@@ -69,16 +69,16 @@
                         globalMeds = meds;
                         document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
                     },
-                    function(error) {
+                    function (error) {
                         document.getElementById("meds").innerText = error.stack;
                     }
-                );
+                );*/
 
-            }).catch(console.error);
-    </script >
- 
+        }).catch(console.error);
+    </script>
+    <!--
     <button type="button" id="btnChangeMedi">Change medication</button>
-    
+
     <script type="text/javascript">
 
         document.querySelector('#btnChangeMedi').addEventListener('click', changeMedication);
@@ -87,17 +87,17 @@
 
             var mediResource = globalMeds[0].resource;
 
-            mediResource.intent = "delivery";
+            mediResource.intent = "order";
 
             document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
 
             console.log("Button pressed");
-           
+
             console.log(globalClient.update(mediResource));
 
         }
 
     </script>
-
+    -->
 </body>
 </html>
