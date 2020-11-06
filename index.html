@@ -40,7 +40,7 @@
             globalClient = client;
             client.patient.read().then(
                 function (pt) {
-                    document.getElementById("patient_id").innerHTML = "PatientID: Hier kommt die PatientId hin";
+                    document.getElementById("patient_id").innerHTML = "PatientID: " + pt.id; //Hier kommt die PatientId hin";
                     //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                 },
                 function (error) {

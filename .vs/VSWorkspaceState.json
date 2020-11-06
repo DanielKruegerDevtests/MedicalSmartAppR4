@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FHIRLib"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\FHIRLib\\fhir-client.js",
   "PreviewInSolutionExplorer": false
 }
