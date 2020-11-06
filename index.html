@@ -71,11 +71,11 @@
                 function (pt) {
                     document.getElementById("patient_id").innerHTML = pt.id;
                     document.getElementById("patient_birthday").innerHTML = pt.birthDate;
-                    document.getElementById("patient_line").innerHTML = pt.address.line;
-                    document.getElementById("patient_city").innerHTML = pt.address.city;
-                    document.getElementById("patient_state").innerHTML = pt.address.state;
-                    document.getElementById("patient_postalcode").innerHTML = pt.address.postalCode;
-                    document.getElementById("patient_country").innerHTML = pt.address.country;
+                    document.getElementById("patient_line").innerHTML = pt.address[0].line;
+                    document.getElementById("patient_city").innerHTML = pt.address[0].city;
+                    document.getElementById("patient_state").innerHTML = pt.address[0].state;
+                    document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
+                    document.getElementById("patient_country").innerHTML = pt.address[0].country;
                     //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                 },
                 function (error) {
