@@ -20,10 +20,38 @@
     <h1>Smart App Test by ESS/DK</h1>
 
     <h4>Patient information</h4>
+    <table>
+        <tr>
+            <td>PatientID:</td>
+            <td id="patient_id">Loading...</td>
+        </tr>
+        <tr>
+            <td>Birthdate:</td>
+            <td id="patient_birthday">Loading...</td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td id="patient_line">Loading...</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="patient_city">Loading...</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="patient_state">Loading...</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="patient_postalcode">Loading...</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="patient_country">Loading...</td>
+        </tr>
 
-    <p id="patient_id">PatientID: Loading...</p>
-    <br />
-    <p id="patient_birthday">Birthday: Loading...</p>
+    </table>
+
     <!--<h4>Medications</h4>
     <div id="meds">Loading...</div>
     <br/>
@@ -41,8 +69,13 @@
             globalClient = client;
             client.patient.read().then(
                 function (pt) {
-                    document.getElementById("patient_id").innerHTML = "PatientID: " + pt.id;
-                    document.getElementById("patient_birthday").innerHTML = "Birthday: " + pt.birthDate; 
+                    document.getElementById("patient_id").innerHTML = pt.id;
+                    document.getElementById("patient_birthday").innerHTML = pt.birthDate;
+                    document.getElementById("patient_line").innerHTML = pt.address.line;
+                    document.getElementById("patient_city").innerHTML = pt.address.city;
+                    document.getElementById("patient_state").innerHTML = pt.address.state;
+                    document.getElementById("patient_postalcode").innerHTML = pt.address.postalCode;
+                    document.getElementById("patient_country").innerHTML = pt.address.country;
                     //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                 },
                 function (error) {
