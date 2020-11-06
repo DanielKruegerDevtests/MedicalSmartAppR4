@@ -23,6 +23,7 @@
 
     <p id="patient_id">PatientID: Loading...</p>
     <br />
+    <p id="patient_birthday">Birthday: Loading...</p>
     <!--<h4>Medications</h4>
     <div id="meds">Loading...</div>
     <br/>
@@ -32,7 +33,7 @@
     <script type="text/javascript">
 
         var globalClient; // global variable to hold the client object got by ready-function
-       // var globalMeds;
+        // var globalMeds;
 
         FHIR.oauth2.ready().then(function (client) {
 
@@ -40,7 +41,8 @@
             globalClient = client;
             client.patient.read().then(
                 function (pt) {
-                    document.getElementById("patient_id").innerHTML = "PatientID: " + pt.id; //Hier kommt die PatientId hin";
+                    document.getElementById("patient_id").innerHTML = "PatientID: " + pt.id;
+                    document.getElementById("patient_birthday").innerHTML = "Birthday: " + pt.birthDate; 
                     //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                 },
                 function (error) {
