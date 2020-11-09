@@ -49,6 +49,14 @@
             <td></td>
             <td id="patient_country">Loading...</td>
         </tr>
+        <tr>
+            <td>Phone:</td>
+            <td id="patient_phone">Loading...</td>
+        </tr>
+        <tr>
+            <td>General information:</td>
+            <td id="patient_general">Loading...</td>
+        </tr>
 
     </table>
 
@@ -76,6 +84,8 @@
                     document.getElementById("patient_state").innerHTML = pt.address[0].state;
                     document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
                     document.getElementById("patient_country").innerHTML = pt.address[0].country;
+                    document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
+                    document.getElementById("patient_general").innerHTML = pt.maritalStatus.text;
                     //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                 },
                 function (error) {
