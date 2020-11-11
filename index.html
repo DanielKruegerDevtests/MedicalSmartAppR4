@@ -22,6 +22,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Smart App Test by ESS/DK</h1>
     <div id="PatientDiv" class="columnDiv">
@@ -87,12 +88,7 @@
     </div>
     
 
-    <!--<h4>Medications</h4>
-    <div id="meds">Loading...</div>
-    <br/>
-    <h4>Medication Resource</h4>
-    <div id="medResource">Waiting for data...</div>
-    -->
+   <!--SCRIPTS-->
     <script type="text/javascript">
 
         var globalClient; // global variable to hold the client object got by ready-function
@@ -140,7 +136,10 @@
                     function (meds) {
                         //globalMeds = meds;
                         document.getElementById("drugId").innerHTML = meds[0].resource.id;
-                       // document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                        document.getElementById("drugName").innerHTML = meds[0].ressource.medicationCodeableConcept.coding[0].display;
+                        document.getElementById("drugCode").innerHTML = meds[0].ressource.medicationCodeableConcept.coding[0].code;
+                        document.getElementById("drugStatus").innerHTML = meds[0].ressource.status;
+                        document.getElementById("drugIntend").innerHTML = meds[0].ressource.intent;
                     },
                     function (error) {
                         document.getElementById("drugId").innerText = error.stack;
