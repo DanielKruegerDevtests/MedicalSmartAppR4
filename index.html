@@ -121,7 +121,7 @@
             );
 
             // Get MedicationRequests for the selected patient
-            /*client.request("/MedicationRequest?patient=" + client.patient.id, {
+            client.request("/MedicationRequest?patient=" + client.patient.id, {
                 resolveReferences: ["medicationReference"],
                 graph: true
             })
@@ -138,13 +138,14 @@
                 // Render the current patient's medications (or any error)
                 .then(
                     function (meds) {
-                        globalMeds = meds;
-                        document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
+                        //globalMeds = meds;
+                        document.getElementById("drugId").innerHTML = meds[0].resource.id;
+                       // document.getElementById("meds").innerText = JSON.stringify(meds, null, 4);
                     },
                     function (error) {
-                        document.getElementById("meds").innerText = error.stack;
+                        document.getElementById("drugId").innerText = error.stack;
                     }
-                );*/
+                );
 
         }).catch(console.error);
     </script>
