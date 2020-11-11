@@ -68,7 +68,7 @@
     </div>
     <div id="MedicationDiv" class="columnDiv">
         <h4>Medication</h4>
-        <table>
+        <table id="medsTable">
             <tr>
                 <th>Id</th>
                 <th>Drug name</th>
@@ -140,6 +140,10 @@
                         document.getElementById("drugCode").innerHTML = meds[0].resource.medicationCodeableConcept.coding[0].code;
                         document.getElementById("drugStatus").innerHTML = meds[0].resource.status;
                         document.getElementById("drugIntend").innerHTML = meds[0].resource.intent;
+                        var myMedsTable = document.getElementById("medsTable");
+                        var myMedsTableRow = myMedsTable.insertRow(0);
+                        var myMedsTableCell = myMedsTableRow.insertCell(0);
+                        myMedsTableCell.innerHTML = "My created cell";
                     },
                     function (error) {
                         document.getElementById("drugId").innerText = error.stack;
