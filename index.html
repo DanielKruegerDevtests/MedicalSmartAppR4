@@ -16,16 +16,21 @@
         }
     </style>
     <style>
-        .columnDiv {
+        .patientDiv {
             float: left;
-            width: 50%;
+            width: 33%;
+        }
+
+        .medsDiv {
+            float: left;
+            width: 66%;
         }
     </style>
 </head>
 
 <body>
     <h1>Smart App Test by ESS/DK</h1>
-    <div id="PatientDiv" class="columnDiv">
+    <div id="PatientDiv" class="patientDiv">
         <h4>Patient information</h4>
         <table>
             <tr>
@@ -66,7 +71,7 @@
             </tr>
         </table>
     </div>
-    <div id="MedicationDiv" class="columnDiv">
+    <div id="MedicationDiv" class="medsDiv">
         <h4>Medication</h4>
         <table id="medsTable">
             <tr>
@@ -77,14 +82,8 @@
                 <th>Intend</th>
 
             </tr>
-            <!-- <tr>
-                 <td id="drugId">Loading...</td>
-                 <td id="drugName">Loading...</td>
-                 <td id="drugCode">Loading...</td>
-                 <td id="drugStatus">Loading...</td>
-                 <td id="drugIntend">Loading...</td>
-             </tr>-->
         </table>
+        <button type="button" id="btnChangeMedi">Change medication</button>
     </div>
     
 
@@ -136,8 +135,6 @@
                     function (meds) {
                         //globalMeds = meds;
                         var myMedsTable = document.getElementById("medsTable");
-                        //var myMedsTableRow = myMedsTable.insertRow(1);
-                        //var myMedsTableCell = myMedsTableRow.insertCell(0);
 
                         meds.forEach(function (medItem, index) {
                             var myMedsTableRow = myMedsTable.insertRow(index + 1);
@@ -147,14 +144,6 @@
                             myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
                             myMedsTableRow.insertCell(3).innerHTML = medItem.resource.intent;
                         });
-
-                        //document.getElementById("drugId").innerHTML = meds[0].resource.id;
-                        //document.getElementById("drugName").innerHTML = meds[0].resource.medicationCodeableConcept.coding[0].display;
-                        //document.getElementById("drugCode").innerHTML = meds[0].resource.medicationCodeableConcept.coding[0].code;
-                        //document.getElementById("drugStatus").innerHTML = meds[0].resource.status;
-                        //document.getElementById("drugIntend").innerHTML = meds[0].resource.intent;
-                       
-                        // myMedsTableCell.innerHTML = "medslength: " + meds.length;
                     },
                     function (error) {
                         document.getElementById("drugId").innerText = error.stack;
@@ -164,8 +153,6 @@
         }).catch(console.error);
     </script>
     <!--
-    <button type="button" id="btnChangeMedi">Change medication</button>
-
     <script type="text/javascript">
 
         document.querySelector('#btnChangeMedi').addEventListener('click', changeMedication);
