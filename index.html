@@ -6,7 +6,7 @@
     <!--<script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>-->
     <script src='./FHIRLib/fhir-client.js'></script>
     <style>
-        #patient, #meds, #medResource{
+        #patient, #meds, #medResource {
             font-family: Monaco, monospace;
             white-space: pre;
             font-size: 13px;
@@ -25,6 +25,12 @@
             float: left;
             width: 66%;
         }
+    </style>
+    <style>
+         body { 
+             background-image: url('WavesBackground.jpg'); 
+
+         }
     </style>
 </head>
 
@@ -85,9 +91,9 @@
         </table>
         <button type="button" id="btnChangeMedi">Change medication</button>
     </div>
-    
 
-   <!--SCRIPTS-->
+
+    <!--SCRIPTS-->
     <script type="text/javascript">
 
         var globalClient; // global variable to hold the client object got by ready-function
