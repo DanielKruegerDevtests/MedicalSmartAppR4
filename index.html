@@ -136,8 +136,15 @@
                     function (meds) {
                         //globalMeds = meds;
                         var myMedsTable = document.getElementById("medsTable");
-                        var myMedsTableRow = myMedsTable.insertRow(1);
-                        var myMedsTableCell = myMedsTableRow.insertCell(0);
+                        //var myMedsTableRow = myMedsTable.insertRow(1);
+                        //var myMedsTableCell = myMedsTableRow.insertCell(0);
+
+                        meds.foreach(function (medItem, index) {
+                            var myMedsTableRow = myMedsTable.insertRow(index+1);
+                            var myMedsTableCell = myMedsTableRow.insertCell(0);
+                            myMedsTableCell.innerHTML = "Zelle: " + index;
+
+                        });
 
                         document.getElementById("drugId").innerHTML = meds[0].resource.id;
                         document.getElementById("drugName").innerHTML = meds[0].resource.medicationCodeableConcept.coding[0].display;
@@ -145,7 +152,7 @@
                         document.getElementById("drugStatus").innerHTML = meds[0].resource.status;
                         document.getElementById("drugIntend").innerHTML = meds[0].resource.intent;
                        
-                        myMedsTableCell.innerHTML = "medslength: " + meds.length;
+                        // myMedsTableCell.innerHTML = "medslength: " + meds.length;
                     },
                     function (error) {
                         document.getElementById("drugId").innerText = error.stack;
