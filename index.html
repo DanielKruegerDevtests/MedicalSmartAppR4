@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>MedicalSmartAppR4 by ESS</title>
+
     <!--<script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>-->
     <script src='./FHIRLib/fhir-client.js'></script>
+
     <style>
         #patient, #meds, #medResource {
             font-family: Monaco, monospace;
@@ -29,7 +31,6 @@
             background-image: url('WavesBackground.jpg');
             background-repeat: no-repeat;
         }
-
     </style>
    
 </head>
@@ -89,7 +90,8 @@
 
             </tr>
         </table>
-        <button type="button" id="btnChangeMedi">Change medication</button>
+        <button type="button" id="btnChangeMediIntend">Change drug intent</button>
+        <button type="button" id="btnAddDrug">Add drug</button>
     </div>
 
 
@@ -97,7 +99,10 @@
     <script type="text/javascript">
 
         var globalClient; // global variable to hold the client object got by ready-function
-        // var globalMeds;
+        var globalMeds;
+
+        document.querySelector('#btnChangeMediIntend').addEventListener('click', changeMedicationIntend);
+        document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
 
         FHIR.oauth2.ready().then(function (client) {
 
@@ -139,7 +144,7 @@
                 // Render the current patient's medications (or any error)
                 .then(
                     function (meds) {
-                        //globalMeds = meds;
+                        globalMeds = meds;
                         var myMedsTable = document.getElementById("medsTable");
 
                         meds.forEach(function (medItem, index) {
@@ -157,27 +162,22 @@
                 );
 
         }).catch(console.error);
-    </script>
-    <!--
-    <script type="text/javascript">
 
-        document.querySelector('#btnChangeMedi').addEventListener('click', changeMedication);
-
-        function changeMedication() {
+        function changeMedicationIntend() {
 
             var mediResource = globalMeds[0].resource;
 
             mediResource.intent = "order";
-
             document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
-
-            console.log("Button pressed");
-
+            console.log("Change medication intend");
             console.log(globalClient.update(mediResource));
 
         }
 
+        function addDrug() {
+            console.log("Add drug");
+        }
     </script>
-    -->
+   
 </body>
 </html>
