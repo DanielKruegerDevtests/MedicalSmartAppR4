@@ -91,6 +91,11 @@
             </tr>
         </table>
         <button type="button" id="btnChangeMediIntend">Change drug intent</button>
+        <select name="Intends" size="3">
+            <option>proposal</option>
+            <option>plan</option>
+            <option selected>order</option>
+        </select>
         <button type="button" id="btnAddDrug">Add drug</button>
     </div>
 
@@ -153,7 +158,7 @@
                             myMedsTableRow.insertCell(1).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].display;
                             myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
                             myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
-                            myMedsTableRow.insertCell(3).innerHTML = medItem.resource.intent;
+                            myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
                         });
                     },
                     function (error) {
