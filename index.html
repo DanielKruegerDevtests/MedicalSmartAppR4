@@ -90,15 +90,7 @@
 
             </tr>
         </table>
-        <!--
-        <select name="Intends" size="3">
-            <option>proposal</option>
-            <option>plan</option>
-            <option selected>order</option>
-        </select>
-        
-        <button type="button" id="btnChangeMediIntend">Change drug intent</button>
-        -->
+      
         <select id="DrugSelect" name="Drugs" size="3">
             <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
             <option>Camila 28 Day Pack</option>
@@ -112,7 +104,6 @@
         <script type="text/javascript">
 
             var globalClient; // global variable to hold the client object got by ready-function
-            var globalMeds;
 
             var AvailableDrugs = {
                 drugs: [
@@ -129,7 +120,7 @@
                             }
                         ]
                     },
-                    "status": "stopped",
+                    "status": "active",
                     "intent": "order",
                     "medicationCodeableConcept": {
                         "coding": [
@@ -166,7 +157,7 @@
                             }
                         ]
                     },
-                    "status": "stopped",
+                    "status": "active",
                     "intent": "order",
                     "medicationCodeableConcept": {
                         "coding": [
@@ -203,7 +194,7 @@
                             }
                         ]
                     },
-                    "status": "stopped",
+                    "status": "active",
                     "intent": "plan",
                     "medicationCodeableConcept": {
                         "coding": [
@@ -236,10 +227,9 @@
                 }
                 ]};
                 
-
-            //document.querySelector('#btnChangeMediIntend').addEventListener('click', changeMedicationIntend);
             document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
 
+            //<!--FUNTIONS-->
             FHIR.oauth2.ready().then(function (client) {
 
                 // Render the current patient (or any error)
@@ -255,7 +245,6 @@
                         document.getElementById("patient_country").innerHTML = pt.address[0].country;
                         document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
                         document.getElementById("patient_general").innerHTML = pt.maritalStatus.text + ", " + pt.communication[0].language.text;
-                        //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                     },
                     function (error) {
                         document.getElementById("patient_id").innerText = error.stack;
@@ -280,7 +269,7 @@
                     // Render the current patient's medications (or any error)
                     .then(
                         function (meds) {
-                            globalMeds = meds;
+
                             var myMedsTable = document.getElementById("medsTable");
 
                             meds.forEach(function (medItem, index) {
@@ -299,29 +288,13 @@
 
             }).catch(console.error);
 
-            function changeMedicationIntend() {
-
-                var mediResource = globalMeds[0].resource;
-
-                mediResource.intent = "plan";
-                document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
-                console.log("Change medication intend");
-                console.log(globalClient.update(mediResource));
-
-
-            }
-
             function addDrug() {
 
-                console.log("Add drug");
-
-                var mediResource = globalMeds[0].resource;
                 var selectedDrugIndex = document.getElementById("DrugSelect").selectedIndex;
 
                 AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient/" + globalClient.patient.id;            
                 console.log(AvailableDrugs.drugs[selectedDrugIndex]);
                 console.log(globalClient.create(AvailableDrugs.drugs[selectedDrugIndex]));
-
             }
         </script>
 
