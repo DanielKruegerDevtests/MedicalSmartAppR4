@@ -90,13 +90,15 @@
 
             </tr>
         </table>
+        <!--
         <select name="Intends" size="3">
             <option>proposal</option>
             <option>plan</option>
             <option selected>order</option>
         </select>
+        
         <button type="button" id="btnChangeMediIntend">Change drug intent</button>
-
+        -->
         <select name="Drugs" size="3">
             <option>Penicillin V Potassium 250 MG Oral Tablet</option>
             <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
@@ -107,88 +109,95 @@
 
 
     <!--SCRIPTS-->
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        var globalClient; // global variable to hold the client object got by ready-function
-        var globalMeds;
+            var globalClient; // global variable to hold the client object got by ready-function
+            var globalMeds;
 
-        document.querySelector('#btnChangeMediIntend').addEventListener('click', changeMedicationIntend);
-        document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
+            document.querySelector('#btnChangeMediIntend').addEventListener('click', changeMedicationIntend);
+            document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
 
-        FHIR.oauth2.ready().then(function (client) {
+            FHIR.oauth2.ready().then(function (client) {
 
-            // Render the current patient (or any error)
-            globalClient = client;
-            client.patient.read().then(
-                function (pt) {
-                    document.getElementById("patient_id").innerHTML = pt.id;
-                    document.getElementById("patient_birthday").innerHTML = pt.birthDate;
-                    document.getElementById("patient_line").innerHTML = pt.address[0].line;
-                    document.getElementById("patient_city").innerHTML = pt.address[0].city;
-                    document.getElementById("patient_state").innerHTML = pt.address[0].state;
-                    document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
-                    document.getElementById("patient_country").innerHTML = pt.address[0].country;
-                    document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
-                    document.getElementById("patient_general").innerHTML = pt.maritalStatus.text + ", " + pt.communication[0].language.text;
-                    //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
-                },
-                function (error) {
-                    document.getElementById("patient_id").innerText = error.stack;
-                }
-            );
-
-            // Get MedicationRequests for the selected patient
-            client.request("/MedicationRequest?patient=" + client.patient.id, {
-                resolveReferences: ["medicationReference"],
-                graph: true
-            })
-
-                // Reject if no MedicationRequests are found
-                .then(function (data) {
-                    if (!data.entry || !data.entry.length) {
-                        throw new Error("No medications found for the selected patient");
-                    }
-                    return data.entry;
-                })
-
-
-                // Render the current patient's medications (or any error)
-                .then(
-                    function (meds) {
-                        globalMeds = meds;
-                        var myMedsTable = document.getElementById("medsTable");
-
-                        meds.forEach(function (medItem, index) {
-                            var myMedsTableRow = myMedsTable.insertRow(index + 1);
-                            myMedsTableRow.insertCell(0).innerHTML = medItem.resource.id;
-                            myMedsTableRow.insertCell(1).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].display;
-                            myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
-                            myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
-                            myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
-                        });
+                // Render the current patient (or any error)
+                globalClient = client;
+                client.patient.read().then(
+                    function (pt) {
+                        document.getElementById("patient_id").innerHTML = pt.id;
+                        document.getElementById("patient_birthday").innerHTML = pt.birthDate;
+                        document.getElementById("patient_line").innerHTML = pt.address[0].line;
+                        document.getElementById("patient_city").innerHTML = pt.address[0].city;
+                        document.getElementById("patient_state").innerHTML = pt.address[0].state;
+                        document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
+                        document.getElementById("patient_country").innerHTML = pt.address[0].country;
+                        document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
+                        document.getElementById("patient_general").innerHTML = pt.maritalStatus.text + ", " + pt.communication[0].language.text;
+                        //document.getElementById("patient").innerText = JSON.stringify(patient, null, 4);
                     },
                     function (error) {
-                        document.getElementById("drugId").innerText = error.stack;
+                        document.getElementById("patient_id").innerText = error.stack;
                     }
                 );
 
-        }).catch(console.error);
+                // Get MedicationRequests for the selected patient
+                client.request("/MedicationRequest?patient=" + client.patient.id, {
+                    resolveReferences: ["medicationReference"],
+                    graph: true
+                })
 
-        function changeMedicationIntend() {
+                    // Reject if no MedicationRequests are found
+                    .then(function (data) {
+                        if (!data.entry || !data.entry.length) {
+                            throw new Error("No medications found for the selected patient");
+                        }
+                        return data.entry;
+                    })
 
-            var mediResource = globalMeds[0].resource;
 
-            mediResource.intent = "order";
-            document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
-            console.log("Change medication intend");
-            console.log(globalClient.update(mediResource));
+                    // Render the current patient's medications (or any error)
+                    .then(
+                        function (meds) {
+                            globalMeds = meds;
+                            var myMedsTable = document.getElementById("medsTable");
 
-        }
+                            meds.forEach(function (medItem, index) {
+                                var myMedsTableRow = myMedsTable.insertRow(index + 1);
+                                myMedsTableRow.insertCell(0).innerHTML = medItem.resource.id;
+                                myMedsTableRow.insertCell(1).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].display;
+                                myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
+                                myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
+                                myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
+                            });
+                        },
+                        function (error) {
+                            document.getElementById("drugId").innerText = error.stack;
+                        }
+                    );
 
-        function addDrug() {
-            console.log("Add drug");
-        }
-    </script>
-   
+            }).catch(console.error);
+
+            function changeMedicationIntend() {
+
+                var mediResource = globalMeds[0].resource;
+
+                mediResource.intent = "plan";
+                document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
+                console.log("Change medication intend");
+                console.log(globalClient.update(mediResource));
+
+
+            }
+
+            function addDrug() {
+                console.log("Add drug");
+
+                var mediResource = globalMeds[0].resource;
+
+                mediResource.intent = "plan";
+                document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
+                console.log(globalClient.create(mediResource));
+            }
+        </script>
+
 </body>
 </html>
