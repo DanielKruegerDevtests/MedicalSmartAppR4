@@ -316,12 +316,10 @@
                 console.log("Add drug");
 
                 var mediResource = globalMeds[0].resource;
-                var x = document.getElementById("DrugSelect").selectedIndex;
+                var selectedDrugIndex = document.getElementById("DrugSelect").selectedIndex;
 
-                
-                console.log("Value: " + x);
-                console.log(AvailableDrugs.drugs[x]);
-               // mediResource.intent = "plan";
+                AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient / " + globalClient.patient.id;            
+                console.log(AvailableDrugs.drugs[selectedDrugIndex]);
                 console.log(globalClient.create(AvailableDrugs.drugs[x]));
 
             }
