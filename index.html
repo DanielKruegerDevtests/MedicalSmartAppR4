@@ -189,12 +189,12 @@
             }
 
             function addDrug() {
+
                 console.log("Add drug");
 
                 var mediResource = globalMeds[0].resource;
 
                 mediResource.intent = "plan";
-                document.getElementById("medResource").innerText = JSON.stringify(mediResource, null, 4);
                 console.log(globalClient.create(mediResource));
             }
         </script>
