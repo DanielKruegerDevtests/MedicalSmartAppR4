@@ -318,7 +318,7 @@
                 var mediResource = globalMeds[0].resource;
                 var selectedDrugIndex = document.getElementById("DrugSelect").selectedIndex;
 
-                AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient / " + globalClient.patient.id;            
+                AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient/" + globalClient.patient.id;            
                 console.log(AvailableDrugs.drugs[selectedDrugIndex]);
                 console.log(globalClient.create(AvailableDrugs.drugs[selectedDrugIndex]));
 
