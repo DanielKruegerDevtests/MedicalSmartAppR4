@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <h1>Smart App Test by ESS/DK</h1>
+    <h1>Smart App Test by ESS</h1>
     <div id="PatientDiv" class="patientDiv">
         <h4>Patient information</h4>
         <table>
@@ -99,10 +99,10 @@
         
         <button type="button" id="btnChangeMediIntend">Change drug intent</button>
         -->
-        <select name="Drugs" size="3">
-            <option>Penicillin V Potassium 250 MG Oral Tablet</option>
+        <select is ="DrugSelect" name="Drugs" size="3">
             <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
-            <option selected>Camila 28 Day Pack</option>
+            <option>Camila 28 Day Pack</option>
+            <option>Penicillin V Potassium 250 MG Oral Tablet</option>
         </select>
         <button type="button" id="btnAddDrug">Add drug</button>
     </div>
@@ -193,9 +193,12 @@
                 console.log("Add drug");
 
                 var mediResource = globalMeds[0].resource;
+                var x = document.getElementById("DrugSelect").value;
 
-                mediResource.intent = "plan";
-                console.log(globalClient.create(mediResource));
+                console.log("Value: " + x);
+               // mediResource.intent = "plan";
+                //console.log(globalClient.create(mediResource));
+
             }
         </script>
 
