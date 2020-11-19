@@ -22,7 +22,7 @@
 
 <body>
     <h1>Smart App Test by ESS</h1>
-    <table style="border: 1px solid black">
+    <table>
         <tr style="vertical-align: top">
             <td style="border: 1px solid black">
                 <h4>Patient information</h4>
@@ -68,7 +68,7 @@
             <td style="border: 1px solid black">
                 <h4>Medication</h4>
                 <table id="medsTable">
-                    <tr>
+                    <tr style="text-align: left" >
                         <th>Id</th>
                         <th>Drug name</th>
                         <th>Drug code</th>
@@ -276,6 +276,11 @@
                                 myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
                                 myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
                                 myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
+
+                                if (index % 2 == 0) {
+                                    myMedsTableRow.style.background = 'LightGray';
+                                }
+
                             });
                         },
                         function (error) {
