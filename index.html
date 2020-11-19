@@ -20,13 +20,11 @@
         .patientDiv {
             float: left;
             width: 33%;
-            height: 70%
         }
 
         .medsDiv {
             float: left;
             width: 66%;
-            height: 70%;
         }
         .addDurgsDiv{
             height:30%;
@@ -45,63 +43,62 @@
 
 <body>
     <h1>Smart App Test by ESS</h1>
-    <div id="PatientDiv" class="patientDiv">
-        <h4>Patient information</h4>
-        <table>
-            <tr>
-                <td>PatientID:</td>
-                <td id="patient_id">Loading...</td>
-            </tr>
-            <tr>
-                <td>Birthdate:</td>
-                <td id="patient_birthday">Loading...</td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td id="patient_line">Loading...</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td id="patient_city">Loading...</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td id="patient_state">Loading...</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td id="patient_postalcode">Loading...</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td id="patient_country">Loading...</td>
-            </tr>
-            <tr>
-                <td>Phone:</td>
-                <td id="patient_phone">Loading...</td>
-            </tr>
-            <tr>
-                <td>General information:</td>
-                <td id="patient_general">Loading...</td>
-            </tr>
-        </table>
+    <div style="height:70%">
+        <div id="PatientDiv" class="patientDiv">
+            <h4>Patient information</h4>
+            <table>
+                <tr>
+                    <td>PatientID:</td>
+                    <td id="patient_id">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Birthdate:</td>
+                    <td id="patient_birthday">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td id="patient_line">Loading...</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="patient_city">Loading...</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="patient_state">Loading...</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="patient_postalcode">Loading...</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="patient_country">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td id="patient_phone">Loading...</td>
+                </tr>
+                <tr>
+                    <td>General information:</td>
+                    <td id="patient_general">Loading...</td>
+                </tr>
+            </table>
+        </div>
+        <div id="MedicationDiv" class="medsDiv">
+            <h4>Medication</h4>
+            <table id="medsTable">
+                <tr>
+                    <th>Id</th>
+                    <th>Drug name</th>
+                    <th>Drug code</th>
+                    <th>Status</th>
+                    <th>Intend</th>
+
+                </tr>
+            </table>
+        </div>
     </div>
-    <div id="MedicationDiv" class="medsDiv">
-        <h4>Medication</h4>
-        <table id="medsTable">
-            <tr>
-                <th>Id</th>
-                <th>Drug name</th>
-                <th>Drug code</th>
-                <th>Status</th>
-                <th>Intend</th>
-
-            </tr>
-        </table>
-
-
-    </div>
-    <br/>
     <div class="addDurgsDiv">
         <select id="DrugSelect" name="Drugs" size="3">
             <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
