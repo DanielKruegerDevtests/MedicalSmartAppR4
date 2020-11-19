@@ -43,269 +43,278 @@
 
 <body>
     <h1>Smart App Test by ESS</h1>
-    <div style="height:70%;">
-        <div id="PatientDiv" class="patientDiv">
-            <h4>Patient information</h4>
-            <table>
-                <tr>
-                    <td>PatientID:</td>
-                    <td id="patient_id">Loading...</td>
-                </tr>
-                <tr>
-                    <td>Birthdate:</td>
-                    <td id="patient_birthday">Loading...</td>
-                </tr>
-                <tr>
-                    <td>Address:</td>
-                    <td id="patient_line">Loading...</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td id="patient_city">Loading...</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td id="patient_state">Loading...</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td id="patient_postalcode">Loading...</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td id="patient_country">Loading...</td>
-                </tr>
-                <tr>
-                    <td>Phone:</td>
-                    <td id="patient_phone">Loading...</td>
-                </tr>
-                <tr>
-                    <td>General information:</td>
-                    <td id="patient_general">Loading...</td>
-                </tr>
-            </table>
-        </div>
-        <div id="MedicationDiv" class="medsDiv">
-            <h4>Medication</h4>
-            <table id="medsTable">
-                <tr>
-                    <th>Id</th>
-                    <th>Drug name</th>
-                    <th>Drug code</th>
-                    <th>Status</th>
-                    <th>Intend</th>
+    <table>
+        <tr>
+            <td>
+                <h4>Patient information</h4>
+                <table>
+                    <tr>
+                        <td>PatientID:</td>
+                        <td id="patient_id">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>Birthdate:</td>
+                        <td id="patient_birthday">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td id="patient_line">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="patient_city">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="patient_state">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="patient_postalcode">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="patient_country">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td id="patient_phone">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>General information:</td>
+                        <td id="patient_general">Loading...</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <h4>Medication</h4>
+                <table id="medsTable">
+                    <tr>
+                        <th>Id</th>
+                        <th>Drug name</th>
+                        <th>Drug code</th>
+                        <th>Status</th>
+                        <th>Intend</th>
 
-                </tr>
-            </table>
-        </div>
-    </div>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <select id="DrugSelect" name="Drugs" size="3">
+                    <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
+                    <option>Camila 28 Day Pack</option>
+                    <option>Penicillin V Potassium 250 MG Oral Tablet</option>
+                </select>
+                <button type="button" id="btnAddDrug">Add drug</button>
+            </td>
+        </tr>
+    </table>
 
-    <select id="DrugSelect" name="Drugs" size="3">
-        <option>Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 M</option>
-        <option>Camila 28 Day Pack</option>
-        <option>Penicillin V Potassium 250 MG Oral Tablet</option>
-    </select>
-    <button type="button" id="btnAddDrug">Add drug</button>
+
+        
 
 
-    <!--SCRIPTS-->
-    <script type="text/javascript">
+        <!--SCRIPTS-->
+        <script type="text/javascript">
 
-        var globalClient; // global variable to hold the client object got by ready-function
+            var globalClient; // global variable to hold the client object got by ready-function
 
-        var AvailableDrugs = {
-            drugs: [
-                {
-                    "resourceType": "MedicationRequest",
-                    "id": "897e6cb0-5122-4caa-b9e0-f81188a8ecd3",
-                    "meta": {
-                        "versionId": "2",
-                        "lastUpdated": "2019-06-05T02:59:07.146-04:00",
-                        "tag": [
-                            {
-                                "system": "https://smarthealthit.org/tags",
-                                "code": "synthea-5-2019"
-                            }
-                        ]
-                    },
-                    "status": "active",
-                    "intent": "order",
-                    "medicationCodeableConcept": {
-                        "coding": [
-                            {
-                                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                                "code": "1860154",
-                                "display": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet"
-                            }
-                        ],
-                        "text": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet"
-                    },
-                    "subject": {
-                        "reference": "Patient/326b4675-0bc8-4dbd-b406-a5564c282401"
-                    },
-                    "encounter": {
-                        "reference": "Encounter/ec0151a5-f1d4-4b6d-9470-0ba9218dd3cf"
-                    },
-                    "authoredOn": "2016-05-28T18:00:28-04:00",
-                    "requester": {
-                        "reference": "Practitioner/21deb55c-2cda-4306-947d-001412452463"
-                    }
-                },
-
-                {
-                    "resourceType": "MedicationRequest",
-                    "id": "dcac4ca0-35b5-4c36-9bb3-d6caf345a174",
-                    "meta": {
-                        "versionId": "2",
-                        "lastUpdated": "2019-06-05T02:56:21.410-04:00",
-                        "tag": [
-                            {
-                                "system": "https://smarthealthit.org/tags",
-                                "code": "synthea-5-2019"
-                            }
-                        ]
-                    },
-                    "status": "active",
-                    "intent": "order",
-                    "medicationCodeableConcept": {
-                        "coding": [
-                            {
-                                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                                "code": "748962",
-                                "display": "Camila 28 Day Pack"
-                            }
-                        ],
-                        "text": "Camila 28 Day Pack"
-                    },
-                    "subject": {
-                        "reference": "Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55"
-                    },
-                    "encounter": {
-                        "reference": "Encounter/02c27f1c-2da7-4c18-9c63-8c0eae2a85c2"
-                    },
-                    "authoredOn": "2006-06-06T02:49:25-04:00",
-                    "requester": {
-                        "reference": "Practitioner/a6dfe8e5-f65e-4eda-a572-850f7ac0d7cf"
-                    }
-                },
-
-                {
-                    "resourceType": "MedicationRequest",
-                    "id": "661386",
-                    "meta": {
-                        "versionId": "1",
-                        "lastUpdated": "2020-11-13T05:21:55.821-05:00",
-                        "tag": [
-                            {
-                                "system": "https://smarthealthit.org/tags",
-                                "code": "synthea-5-2019"
-                            }
-                        ]
-                    },
-                    "status": "active",
-                    "intent": "plan",
-                    "medicationCodeableConcept": {
-                        "coding": [
-                            {
-                                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                                "code": "834061",
-                                "display": "Penicillin V Potassium 250 MG Oral Tablet"
-                            }
-                        ],
-                        "text": "Penicillin V Potassium 250 MG Oral Tablet"
-                    },
-                    "subject": {
-                        "reference": "Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55"
-                    },
-                    "encounter": {
-                        "reference": "Encounter/3390f97e-5242-47dc-90a0-8c7d7c338ab0"
-                    },
-                    "authoredOn": "2018-10-23T00:38:16-04:00",
-                    "requester": {
-                        "reference": "Practitioner/85aeca59-6261-4704-a2e4-1846ec5831a6"
-                    },
-                    "reasonReference": [
-                        {
-                            "reference": "Condition/9fc53840-d71a-4169-9217-0743b509c1bf"
+            var AvailableDrugs = {
+                drugs: [
+                    {
+                        "resourceType": "MedicationRequest",
+                        "id": "897e6cb0-5122-4caa-b9e0-f81188a8ecd3",
+                        "meta": {
+                            "versionId": "2",
+                            "lastUpdated": "2019-06-05T02:59:07.146-04:00",
+                            "tag": [
+                                {
+                                    "system": "https://smarthealthit.org/tags",
+                                    "code": "synthea-5-2019"
+                                }
+                            ]
                         },
-                        {
-                            "reference": "Condition/18e07ee7-cfba-44b7-98c9-c7e42e7f16f6"
+                        "status": "active",
+                        "intent": "order",
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "code": "1860154",
+                                    "display": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet"
+                                }
+                            ],
+                            "text": "Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet"
+                        },
+                        "subject": {
+                            "reference": "Patient/326b4675-0bc8-4dbd-b406-a5564c282401"
+                        },
+                        "encounter": {
+                            "reference": "Encounter/ec0151a5-f1d4-4b6d-9470-0ba9218dd3cf"
+                        },
+                        "authoredOn": "2016-05-28T18:00:28-04:00",
+                        "requester": {
+                            "reference": "Practitioner/21deb55c-2cda-4306-947d-001412452463"
                         }
-                    ]
-                }
-            ]
-        };
+                    },
 
-        document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
+                    {
+                        "resourceType": "MedicationRequest",
+                        "id": "dcac4ca0-35b5-4c36-9bb3-d6caf345a174",
+                        "meta": {
+                            "versionId": "2",
+                            "lastUpdated": "2019-06-05T02:56:21.410-04:00",
+                            "tag": [
+                                {
+                                    "system": "https://smarthealthit.org/tags",
+                                    "code": "synthea-5-2019"
+                                }
+                            ]
+                        },
+                        "status": "active",
+                        "intent": "order",
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "code": "748962",
+                                    "display": "Camila 28 Day Pack"
+                                }
+                            ],
+                            "text": "Camila 28 Day Pack"
+                        },
+                        "subject": {
+                            "reference": "Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55"
+                        },
+                        "encounter": {
+                            "reference": "Encounter/02c27f1c-2da7-4c18-9c63-8c0eae2a85c2"
+                        },
+                        "authoredOn": "2006-06-06T02:49:25-04:00",
+                        "requester": {
+                            "reference": "Practitioner/a6dfe8e5-f65e-4eda-a572-850f7ac0d7cf"
+                        }
+                    },
 
-        //<!--FUNTIONS-->
-        FHIR.oauth2.ready().then(function (client) {
-
-            // Render the current patient (or any error)
-            globalClient = client;
-            client.patient.read().then(
-                function (pt) {
-                    document.getElementById("patient_id").innerHTML = pt.id;
-                    document.getElementById("patient_birthday").innerHTML = pt.birthDate;
-                    document.getElementById("patient_line").innerHTML = pt.address[0].line;
-                    document.getElementById("patient_city").innerHTML = pt.address[0].city;
-                    document.getElementById("patient_state").innerHTML = pt.address[0].state;
-                    document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
-                    document.getElementById("patient_country").innerHTML = pt.address[0].country;
-                    document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
-                    document.getElementById("patient_general").innerHTML = pt.maritalStatus.text + ", " + pt.communication[0].language.text;
-                },
-                function (error) {
-                    document.getElementById("patient_id").innerText = error.stack;
-                }
-            );
-
-            // Get MedicationRequests for the selected patient
-            client.request("/MedicationRequest?patient=" + client.patient.id, {
-                resolveReferences: ["medicationReference"],
-                graph: true
-            })
-
-                // Reject if no MedicationRequests are found
-                .then(function (data) {
-                    if (!data.entry || !data.entry.length) {
-                        throw new Error("No medications found for the selected patient");
+                    {
+                        "resourceType": "MedicationRequest",
+                        "id": "661386",
+                        "meta": {
+                            "versionId": "1",
+                            "lastUpdated": "2020-11-13T05:21:55.821-05:00",
+                            "tag": [
+                                {
+                                    "system": "https://smarthealthit.org/tags",
+                                    "code": "synthea-5-2019"
+                                }
+                            ]
+                        },
+                        "status": "active",
+                        "intent": "plan",
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "code": "834061",
+                                    "display": "Penicillin V Potassium 250 MG Oral Tablet"
+                                }
+                            ],
+                            "text": "Penicillin V Potassium 250 MG Oral Tablet"
+                        },
+                        "subject": {
+                            "reference": "Patient/fc200fa2-12c9-4276-ba4a-e0601d424e55"
+                        },
+                        "encounter": {
+                            "reference": "Encounter/3390f97e-5242-47dc-90a0-8c7d7c338ab0"
+                        },
+                        "authoredOn": "2018-10-23T00:38:16-04:00",
+                        "requester": {
+                            "reference": "Practitioner/85aeca59-6261-4704-a2e4-1846ec5831a6"
+                        },
+                        "reasonReference": [
+                            {
+                                "reference": "Condition/9fc53840-d71a-4169-9217-0743b509c1bf"
+                            },
+                            {
+                                "reference": "Condition/18e07ee7-cfba-44b7-98c9-c7e42e7f16f6"
+                            }
+                        ]
                     }
-                    return data.entry;
-                })
+                ]
+            };
 
+            document.querySelector('#btnAddDrug').addEventListener('click', addDrug);
 
-                // Render the current patient's medications (or any error)
-                .then(
-                    function (meds) {
+            //<!--FUNTIONS-->
+            FHIR.oauth2.ready().then(function (client) {
 
-                        var myMedsTable = document.getElementById("medsTable");
-
-                        meds.forEach(function (medItem, index) {
-                            var myMedsTableRow = myMedsTable.insertRow(index + 1);
-                            myMedsTableRow.insertCell(0).innerHTML = medItem.resource.id;
-                            myMedsTableRow.insertCell(1).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].display;
-                            myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
-                            myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
-                            myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
-                        });
+                // Render the current patient (or any error)
+                globalClient = client;
+                client.patient.read().then(
+                    function (pt) {
+                        document.getElementById("patient_id").innerHTML = pt.id;
+                        document.getElementById("patient_birthday").innerHTML = pt.birthDate;
+                        document.getElementById("patient_line").innerHTML = pt.address[0].line;
+                        document.getElementById("patient_city").innerHTML = pt.address[0].city;
+                        document.getElementById("patient_state").innerHTML = pt.address[0].state;
+                        document.getElementById("patient_postalcode").innerHTML = pt.address[0].postalCode;
+                        document.getElementById("patient_country").innerHTML = pt.address[0].country;
+                        document.getElementById("patient_phone").innerHTML = pt.telecom[0].value + " (" + pt.telecom[0].use + ")";
+                        document.getElementById("patient_general").innerHTML = pt.maritalStatus.text + ", " + pt.communication[0].language.text;
                     },
                     function (error) {
-                        document.getElementById("drugId").innerText = error.stack;
+                        document.getElementById("patient_id").innerText = error.stack;
                     }
                 );
 
-        }).catch(console.error);
+                // Get MedicationRequests for the selected patient
+                client.request("/MedicationRequest?patient=" + client.patient.id, {
+                    resolveReferences: ["medicationReference"],
+                    graph: true
+                })
 
-        function addDrug() {
+                    // Reject if no MedicationRequests are found
+                    .then(function (data) {
+                        if (!data.entry || !data.entry.length) {
+                            throw new Error("No medications found for the selected patient");
+                        }
+                        return data.entry;
+                    })
 
-            var selectedDrugIndex = document.getElementById("DrugSelect").selectedIndex;
 
-            AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient/" + globalClient.patient.id;
-            console.log(AvailableDrugs.drugs[selectedDrugIndex]);
-            console.log(globalClient.create(AvailableDrugs.drugs[selectedDrugIndex]));
-        }
-    </script>
+                    // Render the current patient's medications (or any error)
+                    .then(
+                        function (meds) {
+
+                            var myMedsTable = document.getElementById("medsTable");
+
+                            meds.forEach(function (medItem, index) {
+                                var myMedsTableRow = myMedsTable.insertRow(index + 1);
+                                myMedsTableRow.insertCell(0).innerHTML = medItem.resource.id;
+                                myMedsTableRow.insertCell(1).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].display;
+                                myMedsTableRow.insertCell(2).innerHTML = medItem.resource.medicationCodeableConcept.coding[0].code;
+                                myMedsTableRow.insertCell(3).innerHTML = medItem.resource.status;
+                                myMedsTableRow.insertCell(4).innerHTML = medItem.resource.intent;
+                            });
+                        },
+                        function (error) {
+                            document.getElementById("drugId").innerText = error.stack;
+                        }
+                    );
+
+            }).catch(console.error);
+
+            function addDrug() {
+
+                var selectedDrugIndex = document.getElementById("DrugSelect").selectedIndex;
+
+                AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient/" + globalClient.patient.id;
+                console.log(AvailableDrugs.drugs[selectedDrugIndex]);
+                console.log(globalClient.create(AvailableDrugs.drugs[selectedDrugIndex]));
+            }
+        </script>
 
 </body>
 </html>
