@@ -330,7 +330,21 @@
 
                     .then(
                         function (addedDrug) {
+
+                            var myMedsTable = document.getElementById("medsTable");
+
                             console.log(addedDrug);
+
+                            var myNewTableRow = myMedsTable.insertRow(0);
+                            myNewTableRow.insertCell(0).innerHTML = addedDrug.id;
+                            myNewTableRow.insertCell(1).innerHTML = addedDrug.medicationCodeableConcept.coding[0].display;
+                            myNewTableRow.insertCell(2).innerHTML = addedDrug.medicationCodeableConcept.coding[0].code;
+                            myNewTableRow.insertCell(3).innerHTML = addedDrug.status;
+                            myNewTableRow.insertCell(4).innerHTML = addedDrug.intent;
+
+                            if (myMedsTable.rows.length % 2 != 0) {
+                                myNewTableRow.style.background = 'LightGray';
+                            }
                         }
                     )
             }
