@@ -326,8 +326,16 @@
 
                 AvailableDrugs.drugs[selectedDrugIndex].subject.reference = "Patient/" + globalClient.patient.id;
                 console.log(AvailableDrugs.drugs[selectedDrugIndex]);
-                console.log(globalClient.create(AvailableDrugs.drugs[selectedDrugIndex]));
+                globalClient.create(AvailableDrugs.drugs[selectedDrugIndex])
+
+                    .then(
+                        function (addedDrug) {
+                            console.log(addedDrug);
+                        }
+                    )
             }
+
+               
         </script>
 
 </body>
