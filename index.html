@@ -104,7 +104,7 @@
             <td style="padding: 10px">
                 <h4>Medication</h4>
                 <table id="medsTable">
-                    <tr style="text-align: left">
+                    <tr style="text-align: left; background: lightblue">
                         <th>Id</th>
                         <th>Drug name</th>
                         <th>Drug code</th>
@@ -347,7 +347,7 @@
                         myNewTableRow.insertCell(3).innerHTML = addedDrug.status;
                         myNewTableRow.insertCell(4).innerHTML = addedDrug.intent;
 
-                        if (myMedsTable.rows.length % 2 == 0) {
+                        if (myMedsTable.rows.length % 2 != 0) {
                             myNewTableRow.style.background = 'LightGray';
                         }
                     }
