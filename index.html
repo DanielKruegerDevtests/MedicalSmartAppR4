@@ -59,7 +59,7 @@
     </table>
     <table style="margin-left: 15%">
         <tr style="vertical-align: top">
-            <td style="background: PowderBlue; padding: 10px">
+            <td style="background: lightblue; padding: 10px">
                 <h4>Patient information</h4>
                 <table>
                     <tr>
@@ -347,8 +347,9 @@
                         myNewTableRow.insertCell(3).innerHTML = addedDrug.status;
                         myNewTableRow.insertCell(4).innerHTML = addedDrug.intent;
 
-                        if (myMedsTable.rows.length % 2 != 0) {
+                        if (myMedsTable.rows.length % 2 == 0) {
                             myNewTableRow.style.background = 'LightGray';
+                            console.log(myMedsTable.rows.length);
                         }
                     }
                 )
